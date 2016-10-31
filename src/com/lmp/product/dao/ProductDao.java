@@ -80,6 +80,7 @@ public class ProductDao {
      * Create new product.
      */
     public void createProduct(Product product) throws Exception {
+    	System.out.println("###inside createProduct");
         if (product != null) {
             try {
                 Connection conn = DBHelper.getconnection();

@@ -1,8 +1,5 @@
 package com.lmp.product.model;
 
-/**
- * @author Hattan
- */
 public class Product {
 
     private int id;
@@ -14,19 +11,18 @@ public class Product {
     private int partner_id;
     private String picture;
 
-    /**
-     * @param id
-     * @param vendor_product_id
-     * @param name
-     * @param description
-     * @param product_available
-     * @param category_id
-     * @param partner_id
-     * @param picture
-     */
-    public Product(int id, String vendor_product_id, String name, String description, boolean product_available, int category_id,
+    public Product(String vendor_product_id, String name, String description, boolean product_available, int category_id, int partner_id, String picture) {
+		this.vendor_product_id = vendor_product_id;
+		this.name = name;
+		this.description = description;
+		this.product_available = product_available;
+		this.category_id = category_id;
+		this.partner_id = partner_id;
+		this.picture = picture;
+	}
+
+	public Product(int id, String vendor_product_id, String name, String description, boolean product_available, int category_id,
                    int partner_id, String picture) {
-        super();
         this.id = id;
         this.vendor_product_id = vendor_product_id;
         this.name = name;

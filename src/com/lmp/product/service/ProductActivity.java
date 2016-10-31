@@ -1,7 +1,5 @@
 package com.lmp.product.service;
 
-import com.company.hr.Employee;
-import com.company.hr.service.representation.EmployeeRepresentation;
 import com.lmp.product.dao.ProductDao;
 import com.lmp.product.model.Product;
 import com.lmp.product.model.ProductRepresentation;
@@ -12,10 +10,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/**
- * This Service is to interact with product entities
- *
- */
 public class ProductActivity {
 
 	private ProductDao productDao;
@@ -24,23 +18,21 @@ public class ProductActivity {
 		this.productDao = productDao;
 	}
 
-	/**
-	 * Get a product by id.
-	 *
-	 * @param id
-	 * @return
-	 * @throws SQLException
-	 */
-	public Product getProduct(int id) throws SQLException {
-		return productDao.selectProduct(id);
+	public ProductRepresentation getProduct(String id) throws SQLException {
+		Product product = productDao.selectProduct(Integer.parseInt(id));
+		
+        ProductRepresentation productRepresentation = new ProductRepresentation();
+        productRepresentation.setId(product.getId());
+        productRepresentation.setName(product.getName());
+        productRepresentation.setDescription(product.getDescription());
+        productRepresentation.setCategory_id(product.getCategory_id());
+        productRepresentation.setPartner_id(product.getPartner_id());
+        productRepresentation.setPicture(product.getPicture());
+        productRepresentation.setVendor_product_id(product.getVendor_product_id());
+        
+        return productRepresentation;
 	}
 
-	/**
-	 * List all the available products.
-	 *
-	 * @return
-	 * @throws SQLException
-	 */
 	public Set<ProductRepresentation> getAllProducts() throws SQLException {
 		Set<ProductRepresentation> productRepresentations = new HashSet<ProductRepresentation>();
 		Set<Product> products = productDao.getAllProducts();
@@ -52,6 +44,7 @@ public class ProductActivity {
           productRepresentation.setId(product.getId());
           productRepresentation.setName(product.getName());
           productRepresentation.setDescription(product.getDescription());
+          productRepresentation.setCategory_id(product.getCategory_id());
           productRepresentation.setPartner_id(product.getPartner_id());
           productRepresentation.setPicture(product.getPicture());
           productRepresentation.setVendor_product_id(product.getVendor_product_id());
@@ -62,14 +55,21 @@ public class ProductActivity {
 		return productRepresentations;
 	}
 
-	/**
-	 * Add one product.
-	 *
-	 * @param product
-	 * @throws Exception
-	 */
-	public void createProduct(Product product) throws Exception {
+	public ProductRepresentation createProduct(String vendorProductId, String name, String description, boolean productAvailable, int categoryId, int partnerId, String picture) throws Exception {
+		Product product = new Product(vendorProductId, name, description, productAvailable, categoryId, partnerId, picture);
+		
 		productDao.createProduct(product);
+		
+        ProductRepresentation productRepresentation = new ProductRepresentation();
+        productRepresentation.setId(product.getId());
+        productRepresentation.setName(product.getName());
+        productRepresentation.setDescription(product.getDescription());
+        productRepresentation.setCategory_id(product.getCategory_id());
+        productRepresentation.setPartner_id(product.getPartner_id());
+        productRepresentation.setPicture(product.getPicture());
+        productRepresentation.setVendor_product_id(product.getVendor_product_id());
+        
+        return productRepresentation;
 	}
 
 	/**

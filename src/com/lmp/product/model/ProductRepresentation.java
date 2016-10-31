@@ -68,5 +68,4 @@ public class ProductRepresentation {
 		this.picture = picture;
 	}
     
-    
 }
