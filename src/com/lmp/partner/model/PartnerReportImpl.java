@@ -1,4 +1,4 @@
-package com.lmp.partner.model.PartnerReport;
+package com.lmp.partner.model;
 
 public class PartnerReportImpl implements PartnerReport{
 

@@ -1,4 +1,4 @@
-package com.lmp.partner.model.Partner;
+package com.lmp.partner.model;
 
 /**
  * partner interface to represent its model
