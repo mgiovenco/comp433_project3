@@ -6,7 +6,6 @@ package com.lmp.partner.model.Partner;
  */
 public interface Partner {
 
-
 	/**
 	 * determines if a customer is active or not
 	 * @return true if active, false else
