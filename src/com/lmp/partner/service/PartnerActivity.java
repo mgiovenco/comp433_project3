@@ -29,18 +29,18 @@ public class PartnerActivity {
 		
         PartnerRepresentation partnerRepresentation = new PartnerRepresentation();
 
-        PartnerRepresentation.setCompanyName(partner.getCompanyName());
+        partnerRepresentation.setCompanyName(partner.getCompanyName());
         
-        PartnerRepresentation.setId(partner.getId());
-        PartnerRepresentation.setAddress(partner.getAddress());
-        PartnerRepresentation.setCity(partner.getCity());
-        PartnerRepresentation.setState(partner.getState());
-        PartnerRepresentation.setPostalCode(partner.getPostalCode());
-        PartnerRepresentation.setCountry(partner.getCountry());
-        PartnerRepresentation.setPhone(partner.getPhone());
-        PartnerRepresentation.setEmail(partner.getEmail());
-        PartnerRepresentation.setURL(partner.getURL());
-        PartnerRepresentation.set(partner.getLogo());
+        partnerRepresentation.setId(partner.getId());
+        partnerRepresentation.setAddress(partner.getAddress());
+        partnerRepresentation.setCity(partner.getCity());
+        partnerRepresentation.setState(partner.getState());
+        partnerRepresentation.setPostalCode(partner.getPostalCode());
+        partnerRepresentation.setCountry(partner.getCountry());
+        partnerRepresentation.setPhone(partner.getPhone());
+        partnerRepresentation.setEmail(partner.getEmail());
+        partnerRepresentation.setURL(partner.getURL());
+        partnerRepresentation.setLogo(partner.getLogo());
        
         return partnerRepresentation;
 	}
