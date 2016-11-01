@@ -57,7 +57,7 @@ public class ProductResource implements ProductService {
 	@POST
 	@Produces({"application/xml" , "application/json"})
 	@Path("/products")
-	public ProductRepresentation createProduct(ProductRequest  productRequest) {
+	public ProductRepresentation createProduct(ProductRequest productRequest) {
 		System.out.println("POST METHOD Request: productRequest=" + productRequest);
         ProductActivity productActivity = new ProductActivity(new ProductDao());
         try {

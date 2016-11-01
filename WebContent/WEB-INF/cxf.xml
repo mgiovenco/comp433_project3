@@ -14,9 +14,10 @@
   	
   <bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
       	
-  	  	<jaxrs:server name="ProductResource" address="http://localhost:8081">
+  	<jaxrs:server name="RestServiceResource" address="http://localhost:8081">
 		<jaxrs:serviceBeans>
 			<ref bean="productServiceRest" />
+			<ref bean="customerOrderServiceRest" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<ref bean="jacksonProvider" />
@@ -25,9 +26,11 @@
 		<jaxrs:schemaLocations>
 			<jaxrs:schemaLocation>com.lmp.product.model.ProductRequest</jaxrs:schemaLocation>
 			<jaxrs:schemaLocation>com.lmp.product.model.ProductRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.lmp.customer.model.CustomerOrderRequest</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.lmp.customer.model.CustomerOrderRepresentation</jaxrs:schemaLocation>
 		</jaxrs:schemaLocations>
 
 	</jaxrs:server>
   	<bean id="productServiceRest" class="com.lmp.product.service.ProductResource" />
-  
+    <bean id="customerOrderServiceRest" class="com.lmp.customer.service.CustomerOrderResource" />
 </beans>
