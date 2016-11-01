@@ -1,57 +1,68 @@
 package com.lmp.partner.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "")
 public class PartnerRequest {
 
-	private boolean isActive;
-	private int addressID;
-	private int partnerID;
-	private String contactName;
-	private String email;
-	private String partnerName;
-	private String password;
-	private String phone;
-	
-	public boolean isActive() {
-		return isActive;
+
+    private int id;
+    private String companyName;
+    private String address;
+    private String city;
+    private String state;
+    private String postalCode;
+    private String country;
+    private String phone;
+    private String email;
+    private String URL;
+    private String logo;
+	public int getId() {
+		return id;
 	}
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public int getAddressID() {
-		return addressID;
+	public String getCompanyName() {
+		return companyName;
 	}
-	public void setAddressID(int addressID) {
-		this.addressID = addressID;
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
-	public int getPartnerID() {
-		return partnerID;
+	public String getAddress() {
+		return address;
 	}
-	public void setPartnerID(int partnerID) {
-		this.partnerID = partnerID;
+	public void setAddress(String address) {
+		this.address = address;
 	}
-	public String getContactName() {
-		return contactName;
+	public String getCity() {
+		return city;
 	}
-	public void setContactName(String contactName) {
-		this.contactName = contactName;
+	public void setCity(String city) {
+		this.city = city;
 	}
-	public String getEmail() {
-		return email;
+	public String getState() {
+		return state;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setState(String state) {
+		this.state = state;
 	}
-	public String getPartnerName() {
-		return partnerName;
+	public String getPostalCode() {
+		return postalCode;
 	}
-	public void setPartnerName(String partnerName) {
-		this.partnerName = partnerName;
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
 	}
-	public String getPassword() {
-		return password;
+	public String getCountry() {
+		return country;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setCountry(String country) {
+		this.country = country;
 	}
 	public String getPhone() {
 		return phone;
@@ -59,5 +70,25 @@ public class PartnerRequest {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getURL() {
+		return URL;
+	}
+	public void setURL(String uRL) {
+		URL = uRL;
+	}
+	public String getLogo() {
+		return logo;
+	}
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+    
+    
+
 }
