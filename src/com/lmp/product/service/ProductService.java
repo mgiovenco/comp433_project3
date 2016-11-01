@@ -4,7 +4,6 @@ import java.util.Set;
 
 import javax.jws.WebService;
 
-import com.company.hr.service.representation.EmployeeRepresentation;
 import com.lmp.product.model.ProductRepresentation;
 import com.lmp.product.model.ProductRequest;
 

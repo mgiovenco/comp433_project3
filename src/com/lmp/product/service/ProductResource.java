@@ -12,9 +12,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.company.hr.service.representation.EmployeeRepresentation;
-import com.company.hr.service.representation.EmployeeRequest;
-import com.company.hr.service.workflow.EmployeeActivity;
 import com.lmp.product.dao.ProductDao;
 import com.lmp.product.model.ProductRepresentation;
 import com.lmp.product.model.ProductRequest;
