@@ -1,7 +1,6 @@
 package com.lmp.partner.service;
 
 
-import java.sql.SQLException;
 import java.util.Set;
 
 import javax.ws.rs.DELETE;
@@ -31,7 +30,7 @@ public class PartnerResource implements PartnerService {
 		System.out.println("POST METHOD Request: partnerRequest=" + partnerRequest);
         PartnerActivity partnerActivity = new PartnerActivity(new PartnerDao());
         try {
-			return partnerActivity.createPartner(partnerRequest.getCompanyName(), partnerRequest.getAddress(), partnerRequest.getCity(), partnerRequest.getState(), partnerRequest.getPostalCode(), partnerRequest.getCountry(), partnerRequest.getPhone(), partnerRequest.getEmail(), partnerRequest.getURL(),partnerRequest.getLogo());
+			return partnerActivity.createPartner(partnerRequest.getId(),partnerRequest.getCompanyName(), partnerRequest.getAddress(), partnerRequest.getCity(), partnerRequest.getState(), partnerRequest.getPostalCode(), partnerRequest.getCountry(), partnerRequest.getPhone(), partnerRequest.getEmail(), partnerRequest.getURL(),partnerRequest.getLogo());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

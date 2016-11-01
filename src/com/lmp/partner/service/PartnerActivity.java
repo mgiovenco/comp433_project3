@@ -23,12 +23,15 @@ public class PartnerActivity {
 		this.partnerDao = partnerDao;
 		}
 		
-	public PartnerRepresentation getPartner(String id) throws SQLException {
-		Partner partner = partnerDao.selectPartner(Integer.parseInt(id));
+	public PartnerRepresentation createPartner(int id, String companyName, String address, String city, String state, String postalCode, String country, String phone, String email, String URL, String logo) throws Exception {
+		Partner partner = new Partner( id,companyName,  address,  city,  state,  postalCode,  country,  phone,  email,  URL,  logo);
+		
 		
         PartnerRepresentation partnerRepresentation = new PartnerRepresentation();
 
         PartnerRepresentation.setCompanyName(partner.getCompanyName());
+        
+        PartnerRepresentation.setId(partner.getId());
         PartnerRepresentation.setAddress(partner.getAddress());
         PartnerRepresentation.setCity(partner.getCity());
         PartnerRepresentation.setState(partner.getState());
@@ -41,6 +44,8 @@ public class PartnerActivity {
        
         return partnerRepresentation;
 	}
+
+
 
 
 }
