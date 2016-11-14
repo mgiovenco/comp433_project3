@@ -18,6 +18,8 @@
 		<jaxrs:serviceBeans>
 			<ref bean="productServiceRest" />
 			<ref bean="customerOrderServiceRest" />
+			<ref bean="partnerServiceRest" />
+		
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<ref bean="jacksonProvider" />
@@ -28,9 +30,12 @@
 			<jaxrs:schemaLocation>com.lmp.product.model.ProductRepresentation</jaxrs:schemaLocation>
 			<jaxrs:schemaLocation>com.lmp.customer.model.CustomerOrderRequest</jaxrs:schemaLocation>
 			<jaxrs:schemaLocation>com.lmp.customer.model.CustomerOrderRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.lmp.partner.model.PartnerRequest</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.lmp.partner.model.PartnerRepresentation</jaxrs:schemaLocation>
 		</jaxrs:schemaLocations>
 
 	</jaxrs:server>
   	<bean id="productServiceRest" class="com.lmp.product.service.ProductResource" />
     <bean id="customerOrderServiceRest" class="com.lmp.customer.service.CustomerOrderResource" />
+    <bean id="partnerServiceRest" class="com.lmp.partner.service.PartnerResource" />
 </beans>
