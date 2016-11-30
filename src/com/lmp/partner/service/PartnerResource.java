@@ -1,6 +1,7 @@
 package com.lmp.partner.service;
 
 
+import java.sql.SQLException;
 import java.util.Set;
 
 import javax.ws.rs.DELETE;
@@ -16,12 +17,43 @@ import javax.ws.rs.core.Response.Status;
 import com.lmp.partner.dao.PartnerDao;
 import com.lmp.partner.model.PartnerRepresentation;
 import com.lmp.partner.model.PartnerRequest;
-
+import com.lmp.product.dao.ProductDao;
 import javax.ws.rs.core.CacheControl;
 
 @Path("/partnerservice/")
 
 public class PartnerResource implements PartnerService {
+	
+
+	@GET
+	@Produces({"application/xml" , "application/json"})
+	@Path("/partners")
+	public Set<PartnerRepresentation> getPartners() {
+		System.out.println("GET METHOD Request for all partners");
+        PartnerActivity partnerActivity = new PartnerActivity(new PartnerDao());
+        try {
+			return partnerActivity.selectAllPartners();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}    
+	}
+
+	@GET
+	@Produces({"application/xml" , "application/json"})
+	@Path("/partners/{partnerId}")
+	public PartnerRepresentation getPartner(@PathParam("partnerId") String partnerId) {
+		System.out.println("GET METHOD Request for one partner, partnerId=" + partnerId);
+        PartnerActivity partnerActivity = new PartnerActivity(new PartnerDao());
+		try {
+			return partnerActivity.getPartner(partnerId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	@POST
 	@Produces({"application/xml" , "application/json"})
