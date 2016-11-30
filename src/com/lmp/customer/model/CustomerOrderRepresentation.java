@@ -8,10 +8,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement(name = "Product")
+import com.lmp.global.AbstractRepresentation;
+
+@XmlRootElement(name = "Order")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class CustomerOrderRepresentation {
+public class CustomerOrderRepresentation extends AbstractRepresentation {
 
     private int id;
     private BigDecimal orderTotal;
@@ -42,4 +44,5 @@ public class CustomerOrderRepresentation {
 	public void setTrackingId(String trackingId) {
 		this.trackingId = trackingId;
 	}
+	
 }

@@ -10,6 +10,7 @@ import com.lmp.customer.model.CustomerOrderRepresentation;
 import com.lmp.customer.model.CustomerOrderRequest;
 import com.lmp.customer.model.CustomerOrderStatusRepresentation;
 import com.lmp.customer.model.Payment;
+import com.lmp.global.Link;
 
 
 public class CustomerOrderActivity {
@@ -28,6 +29,9 @@ public class CustomerOrderActivity {
         customerOrderRepresentation.setOrderTotal(customerOrder.getOrderTotal());
         customerOrderRepresentation.setOrderStatus(customerOrder.getOrderStatus());
         customerOrderRepresentation.setTrackingId(customerOrder.getTrackingId());
+        
+		// Add the links
+		setLinks(customerOrderRepresentation);
         
         return customerOrderRepresentation;
     }
@@ -144,5 +148,14 @@ public class CustomerOrderActivity {
     public void addCustomerOrderDetail(CustomerOrderDetail customerOrderDetail) throws Exception {
         customerOrderDao.createCustomerOrderDetail(customerOrderDetail);
     }
-
+    
+	/**
+	 * Sets all the links appropriately, for each kind of representation based on state
+	 * @param orderRep
+	 */
+	private void setLinks(CustomerOrderRepresentation customerOrderRepresentation) {
+		// Set up the activities that can be performed on orders
+		Link buy = new Link("buy", "http://api.mississippi.com:8080/bookstore/books/order?book_id=" + "123");	
+		customerOrderRepresentation.setLinks(buy);
+	}
 }
