@@ -39,10 +39,10 @@ public class PartnerActivity {
         partnerRepresentation.setURL(partner.getURL());
         partnerRepresentation.setLogo(partner.getLogo());
         
-     // Add the links
-     		setLinks(partnerRepresentation);
-       
-        
+
+        // Add the link with other representations
+        Link searchPartner = new Link("partner by ID", "http://localhost:8081/partnerservice/partners?partnerId="+partner.getId(),"GET");	
+        partnerRepresentation.setLinks(searchPartner);
         return partnerRepresentation;
         }
 		
@@ -70,9 +70,13 @@ public class PartnerActivity {
             
 	        partnerRepresentations.add(partnerRepresentation);
           
-          // Add the links
-   		setLinks(partnerRepresentation);
-        }
+	        // Add the link with other representations
+			
+			Link selectAllPartners = new Link("Select All Partners", "http://localhost:8081/partnerservice/allPartners","GET");	
+			partnerRepresentation.setLinks(selectAllPartners);
+			
+		
+		}
 		return partnerRepresentations;
 	}
 	
@@ -94,21 +98,14 @@ public class PartnerActivity {
         partnerRepresentation.setURL(partner.getURL());
         partnerRepresentation.setLogo(partner.getLogo());
         
-     // Add the links
-     		setLinks(partnerRepresentation);
+     // Add the link with other representations
+        Link create = new Link("createPartner", "http://localhost:8081/partnerservice/newPartner","Post");	
+		partnerRepresentation.setLinks(create);
        
         return partnerRepresentation;
 	}
 
-	/**
-	 * Sets all the links appropriately, for each kind of representation based on state
-	 * @param orderRep
-	 */
-	private void setLinks(PartnerRepresentation partnerRepresentation) {
-		// Set up the activities that can be performed on partners
-		Link create = new Link("createPartner", "http://localhost:8081//partnerservice/partner","Post");	
-		partnerRepresentation.setLinks(create);
-	}
+
 
 
 }

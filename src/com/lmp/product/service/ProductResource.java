@@ -18,7 +18,7 @@ import com.lmp.product.model.ProductRequest;
 
 import javax.ws.rs.core.CacheControl;
 
-@Path("/productservice/")
+@Path("/productservice")
 public class ProductResource implements ProductService {
 
 	@GET

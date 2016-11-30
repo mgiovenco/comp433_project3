@@ -20,14 +20,14 @@ import com.lmp.partner.model.PartnerRequest;
 import com.lmp.product.dao.ProductDao;
 import javax.ws.rs.core.CacheControl;
 
-@Path("/partnerservice/")
+@Path("/partnerservice")
 
 public class PartnerResource implements PartnerService {
 	
 
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/partners")
+	@Path("/allPartners")
 	public Set<PartnerRepresentation> getPartners() {
 		System.out.println("GET METHOD Request for all partners");
         PartnerActivity partnerActivity = new PartnerActivity(new PartnerDao());
@@ -44,7 +44,7 @@ public class PartnerResource implements PartnerService {
 	@Produces({"application/xml" , "application/json"})
 	@Path("/partners/{partnerId}")
 	public PartnerRepresentation getPartner(@PathParam("partnerId") String partnerId) {
-		System.out.println("GET METHOD Request for one partner, partnerId=" + partnerId);
+		System.out.println("GET METHOD Request for one partner by ID, partnerId=" + partnerId);
         PartnerActivity partnerActivity = new PartnerActivity(new PartnerDao());
 		try {
 			return partnerActivity.getPartner(partnerId);
@@ -57,7 +57,7 @@ public class PartnerResource implements PartnerService {
 
 	@POST
 	@Produces({"application/xml" , "application/json"})
-	@Path("/partner")
+	@Path("/newPartner")
 	public PartnerRepresentation createPartner(PartnerRequest  partnerRequest) {
 		System.out.println("POST METHOD Request: partnerRequest=" + partnerRequest);
         PartnerActivity partnerActivity = new PartnerActivity(new PartnerDao());
