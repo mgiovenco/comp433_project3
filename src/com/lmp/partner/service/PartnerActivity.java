@@ -55,7 +55,7 @@ public class PartnerActivity {
 	 */
 	private void setLinks(PartnerRepresentation partnerRepresentation) {
 		// Set up the activities that can be performed on orders
-		Link create = new Link("createPartner", "http://api.mississippi.com:8080/bookstore/books/order?book_id=" + "123");	
+		Link create = new Link("createPartner", "http://localhost:8081//partnerservice/partner");	
 		partnerRepresentation.setLinks(create);
 	}
 
