@@ -83,11 +83,12 @@ public class PartnerActivity {
 	public PartnerRepresentation createPartner(int id, String companyName, String address, String city, String state, String postalCode, String country, String phone, String email, String URL, String logo) throws Exception {
 		Partner partner = new Partner( id,companyName,  address,  city,  state,  postalCode,  country,  phone,  email,  URL,  logo);
 		
+		partnerDao.createPartner(partner);
 		
         PartnerRepresentation partnerRepresentation = new PartnerRepresentation();
 
-        partnerRepresentation.setCompanyName(partner.getCompanyName());      
         partnerRepresentation.setId(partner.getId());
+        partnerRepresentation.setCompanyName(partner.getCompanyName());      
         partnerRepresentation.setAddress(partner.getAddress());
         partnerRepresentation.setCity(partner.getCity());
         partnerRepresentation.setState(partner.getState());
