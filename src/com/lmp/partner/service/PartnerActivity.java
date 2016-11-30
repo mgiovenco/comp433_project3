@@ -1,6 +1,8 @@
 package com.lmp.partner.service;
 
 
+import com.lmp.customer.model.CustomerOrderRepresentation;
+import com.lmp.global.Link;
 import com.lmp.partner.dao.PartnerDao;
 import com.lmp.partner.model.Partner;
 import com.lmp.partner.model.PartnerRepresentation;
@@ -29,8 +31,7 @@ public class PartnerActivity {
 		
         PartnerRepresentation partnerRepresentation = new PartnerRepresentation();
 
-        partnerRepresentation.setCompanyName(partner.getCompanyName());
-        
+        partnerRepresentation.setCompanyName(partner.getCompanyName());      
         partnerRepresentation.setId(partner.getId());
         partnerRepresentation.setAddress(partner.getAddress());
         partnerRepresentation.setCity(partner.getCity());
@@ -41,11 +42,22 @@ public class PartnerActivity {
         partnerRepresentation.setEmail(partner.getEmail());
         partnerRepresentation.setURL(partner.getURL());
         partnerRepresentation.setLogo(partner.getLogo());
+        
+     // Add the links
+     		setLinks(partnerRepresentation);
        
         return partnerRepresentation;
 	}
 
-
+	/**
+	 * Sets all the links appropriately, for each kind of representation based on state
+	 * @param orderRep
+	 */
+	private void setLinks(PartnerRepresentation partnerRepresentation) {
+		// Set up the activities that can be performed on orders
+		Link create = new Link("createPartner", "http://api.mississippi.com:8080/bookstore/books/order?book_id=" + "123");	
+		partnerRepresentation.setLinks(create);
+	}
 
 
 }
