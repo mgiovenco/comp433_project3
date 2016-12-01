@@ -1,5 +1,6 @@
 package com.lmp.product.service;
 
+import com.lmp.global.Link;
 import com.lmp.product.dao.ProductDao;
 import com.lmp.product.model.Product;
 import com.lmp.product.model.ProductRepresentation;
@@ -30,6 +31,11 @@ public class ProductActivity {
         productRepresentation.setPicture(product.getPicture());
         productRepresentation.setVendor_product_id(product.getVendor_product_id());
         
+
+        // Add the link with other representations
+        Link searchProduct = new Link("product by ID", "http://localhost:8081/productservice/products?productId="+product.getId(),"GET");	
+        productRepresentation.setLinks(searchProduct);
+        
         return productRepresentation;
 	}
 
@@ -48,7 +54,11 @@ public class ProductActivity {
           productRepresentation.setPartner_id(product.getPartner_id());
           productRepresentation.setPicture(product.getPicture());
           productRepresentation.setVendor_product_id(product.getVendor_product_id());
-                    
+    
+          // Add the link with other representations
+          Link getAllProducts = new Link("Get All Products", "http://localhost:8081/productservice/products","GET");	
+          productRepresentation.setLinks(getAllProducts);
+                     
           productRepresentations.add(productRepresentation);
         }
 		
@@ -68,6 +78,10 @@ public class ProductActivity {
         productRepresentation.setPartner_id(product.getPartner_id());
         productRepresentation.setPicture(product.getPicture());
         productRepresentation.setVendor_product_id(product.getVendor_product_id());
+        
+        // Add the link with other representations
+        Link creatProduct = new Link("Creat Product", "http://localhost:8081/productservice/products","POST");	
+        productRepresentation.setLinks(creatProduct);
         
         return productRepresentation;
 	}

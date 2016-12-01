@@ -80,14 +80,14 @@ public class PartnerActivity {
 		return partnerRepresentations;
 	}
 	
-	public PartnerRepresentation createPartner(int id, String companyName, String address, String city, String state, String postalCode, String country, String phone, String email, String URL, String logo) throws Exception {
-		Partner partner = new Partner( id,companyName,  address,  city,  state,  postalCode,  country,  phone,  email,  URL,  logo);
+	public PartnerRepresentation createPartner( String companyName, String address, String city, String state, String postalCode, String country, String phone, String email, String URL, String logo) throws Exception {
+		Partner partner = new Partner(companyName,  address,  city,  state,  postalCode,  country,  phone,  email,  URL,  logo);
 		
 		partnerDao.createPartner(partner);
 		
         PartnerRepresentation partnerRepresentation = new PartnerRepresentation();
 
-        partnerRepresentation.setId(partner.getId());
+
         partnerRepresentation.setCompanyName(partner.getCompanyName());      
         partnerRepresentation.setAddress(partner.getAddress());
         partnerRepresentation.setCity(partner.getCity());
@@ -100,8 +100,8 @@ public class PartnerActivity {
         partnerRepresentation.setLogo(partner.getLogo());
         
      // Add the link with other representations
-        Link create = new Link("createPartner", "http://localhost:8081/partnerservice/newPartner","Post");	
-		partnerRepresentation.setLinks(create);
+        Link createPartner = new Link("createPartner", "http://localhost:8081/partnerservice/newPartner","POST");	
+		partnerRepresentation.setLinks(createPartner);
        
         return partnerRepresentation;
 	}
