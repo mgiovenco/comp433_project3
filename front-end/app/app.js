@@ -32,21 +32,24 @@ app.controller('productsCtrl', function($scope, $http) {
 
 
 app.controller("myController", function ($scope, $http) {
-	console.log('inside');
-		
-    $scope.search = function(){
-    	console.log($scope.Reference);
-        var res = $http({
-            method: 'GET',
-            url: 'http://localhost:8081/productservice/products/' + $scope.Reference
-        })
-        .then(function (response) {
-        	console.log('complete: ' + response.data);
-        	$scope.data = response.data;
-            console.log('scope data: ' + $scope.data);
-        });
-    }
-    
 
-    
+	$scope.result = '';
+	
+    $scope.search = function(){
+    	if($scope.productId){
+            var res = $http({
+                method: 'GET',
+                url: 'http://localhost:8081/productservice/products/' + $scope.productId
+            })
+            .then(function (response) {
+            	$scope.result = response.data;
+            	console.log('complete: ' + $scope.result);
+            });
+    	}
+    	else {
+    		$scope.result = '';
+    	}
+
+    }
+   
 });

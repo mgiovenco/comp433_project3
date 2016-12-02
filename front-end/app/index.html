@@ -26,18 +26,22 @@
 
   <div ng-view></div>
 
+	<p>Product Search by Product Id</p>
 	<div ng-app="myApp">
 		<div ng-controller="myController">
-			<form ng-submit="refresh()">
-			  <input type="text" ng-model="Reference"> 
+			<form ng-submit="search()">
+			  <input type="text" ng-model="productId"> 
 			  <input type="submit" value="Search">
 			</form>	
 			<hr>
-			<article>
-				<section>
-				  <h2 ng-repeat="product in refresh.data">{{product.id}}</h2>    
-				</section>
-			</article>
+			<div ng-if=result>
+				<p>{{result}}</p>	
+				<p>Product ID: {{result.id}}</p>
+				<p>Name: {{result.name}}</p>
+				<p>Description: {{result.description}}</p>
+				<p>Available: {{result.product_available}}</p>
+				<p>Purchase: {{result.link}}</p>
+			 </div>
 		</div>
 	</div>
 	
@@ -49,7 +53,7 @@
 
 	<!--  <article ng-app="myApp">
 	  <section ng-controller="productsCtrl">
-	    <h2 ng-repeat="product in data">{{product.id}}</h2>    
+	    <h2 ng-repeat="product in results">{{product.id}}</h2>    
 	  </section>
 	</article>-->
 

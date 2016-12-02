@@ -22,19 +22,21 @@ public class ProductActivity {
 	public ProductRepresentation getProduct(String id) throws SQLException {
 		Product product = productDao.selectProduct(Integer.parseInt(id));
 		
-        ProductRepresentation productRepresentation = new ProductRepresentation();
-        productRepresentation.setId(product.getId());
-        productRepresentation.setName(product.getName());
-        productRepresentation.setDescription(product.getDescription());
-        productRepresentation.setCategory_id(product.getCategory_id());
-        productRepresentation.setPartner_id(product.getPartner_id());
-        productRepresentation.setPicture(product.getPicture());
-        productRepresentation.setVendor_product_id(product.getVendor_product_id());
-        
-
-        // Add the link with other representations
-        Link searchProduct = new Link("product by ID", "http://localhost:8081/productservice/products?productId="+product.getId(),"GET");	
-        productRepresentation.setLinks(searchProduct);
+		ProductRepresentation productRepresentation = null;
+        if(product != null){
+        	productRepresentation = new ProductRepresentation();
+        	productRepresentation.setId(product.getId());
+            productRepresentation.setName(product.getName());
+            productRepresentation.setDescription(product.getDescription());
+            productRepresentation.setCategory_id(product.getCategory_id());
+            productRepresentation.setPartner_id(product.getPartner_id());
+            productRepresentation.setPicture(product.getPicture());
+            productRepresentation.setVendor_product_id(product.getVendor_product_id());
+            
+            // Add the link with other representations
+            Link searchProduct = new Link("product by ID", "http://localhost:8081/productservice/products?productId="+product.getId(),"GET");	
+            productRepresentation.setLinks(searchProduct);
+        }
         
         return productRepresentation;
 	}
