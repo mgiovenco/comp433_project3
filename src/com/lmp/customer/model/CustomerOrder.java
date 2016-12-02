@@ -52,7 +52,7 @@ public class CustomerOrder {
         this.shippingInfoId = shippingInfoId;
     }
 
-    public int getId() {
+	public int getId() {
         return id;
     }
 

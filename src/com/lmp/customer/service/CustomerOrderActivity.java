@@ -1,5 +1,6 @@
 package com.lmp.customer.service;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -111,8 +112,9 @@ public class CustomerOrderActivity {
     
 
     public CustomerOrderRepresentation createCustomerOrder(CustomerOrderRequest customerOrderRequest) throws Exception {
-        CustomerOrder customerOrder = new CustomerOrder();
-
+        
+    	CustomerOrder customerOrder = new CustomerOrder(customerOrderRequest.getId(), customerOrderRequest.getOrderTotal(), customerOrderRequest.getOrderStatus(), customerOrderRequest.getTrackingId(), customerOrderRequest.getCustomerId(),customerOrderRequest.getBillingInfoId(),customerOrderRequest.getShippingInfoId());
+        
         customerOrderDao.createCustomerOrder(customerOrder);
     	
         CustomerOrderRepresentation customerOrderRepresentation = new CustomerOrderRepresentation();
@@ -121,6 +123,8 @@ public class CustomerOrderActivity {
         customerOrderRepresentation.setOrderTotal(customerOrder.getOrderTotal());
         customerOrderRepresentation.setTrackingId(customerOrder.getTrackingId());
     	
+        
+        
      // Add the link with other representations
         Link sendToPartners = new Link("Send To Partners", "http://localhost:8081/orderservice/orders?orderId="+customerOrder.getId()+"/sendtopartners","POST");	
         customerOrderRepresentation.setLinks(sendToPartners);

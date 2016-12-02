@@ -130,6 +130,8 @@ public class CustomerOrderDao {
             try {
                 Connection conn = DBHelper.getconnection();
                 PreparedStatement ps = conn.prepareStatement(INSERT_CUSTOMER_ORDER, Statement.RETURN_GENERATED_KEYS);
+               
+                System.out.println("###customerOrder:: " + customerOrder.toString());
                 ps.setBigDecimal(1, customerOrder.getOrderTotal());
                 ps.setString(2, customerOrder.getOrderStatus());
                 ps.setString(3, customerOrder.getTrackingId());
@@ -138,6 +140,8 @@ public class CustomerOrderDao {
                 ps.setInt(6, customerOrder.getShippingInfoId());
                 ps.setTimestamp(7, new Timestamp(new java.util.Date().getTime()));
 
+                System.out.println("ps: " + ps.toString());
+                
                 int result = ps.executeUpdate();
 
                 if (result == 0) {

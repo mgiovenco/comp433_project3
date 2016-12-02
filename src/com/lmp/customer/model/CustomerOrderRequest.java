@@ -61,5 +61,14 @@ public class CustomerOrderRequest {
 	public void setShippingInfoId(int shippingInfoId) {
 		this.shippingInfoId = shippingInfoId;
 	}
+	
+	@Override
+	public String toString() {
+		return "CustomerOrderRequest [id=" + id + ", orderTotal=" + orderTotal + ", orderStatus=" + orderStatus
+				+ ", trackingId=" + trackingId + ", customerId=" + customerId + ", billingInfoId=" + billingInfoId
+				+ ", shippingInfoId=" + shippingInfoId + "]";
+	}
+	
+	
     
 }
