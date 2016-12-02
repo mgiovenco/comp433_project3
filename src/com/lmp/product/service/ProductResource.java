@@ -18,11 +18,14 @@ import com.lmp.product.model.ProductRequest;
 
 import javax.ws.rs.core.CacheControl;
 
+import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
+
+@CrossOriginResourceSharing(allowAllOrigins = true)
 @Path("/productservice/")
 public class ProductResource implements ProductService {
 
 	@GET
-	@Produces({"application/xml" , "application/json"})
+	@Produces({"application/json", "application/xml"})
 	@Path("/products")
 	public Set<ProductRepresentation> getProducts() {
 		System.out.println("GET METHOD Request for all products");

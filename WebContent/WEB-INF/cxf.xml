@@ -11,15 +11,17 @@
  							http://cxf.apache.org/schemas/jaxrs.xsd">
   <import resource="classpath:META-INF/cxf/cxf.xml" />
   <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
-  	
+  
   <bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
-      	
+  <bean id="productServiceRest" class="com.lmp.product.service.ProductResource" />
+  <bean id="customerOrderServiceRest" class="com.lmp.customer.service.CustomerOrderResource" />
+  <bean id="partnerServiceRest" class="com.lmp.partner.service.PartnerResource" />
+    	
   	<jaxrs:server name="RestServiceResource" address="http://localhost:8081">
 		<jaxrs:serviceBeans>
 			<ref bean="productServiceRest" />
 			<ref bean="customerOrderServiceRest" />
 			<ref bean="partnerServiceRest" />
-		
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<ref bean="jacksonProvider" />
@@ -35,7 +37,5 @@
 		</jaxrs:schemaLocations>
 
 	</jaxrs:server>
-  	<bean id="productServiceRest" class="com.lmp.product.service.ProductResource" />
-    <bean id="customerOrderServiceRest" class="com.lmp.customer.service.CustomerOrderResource" />
-    <bean id="partnerServiceRest" class="com.lmp.partner.service.PartnerResource" />
+
 </beans>

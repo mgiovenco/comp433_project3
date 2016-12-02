@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
+  <title>Lakeshore Market Place</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
@@ -16,8 +16,8 @@
 </head>
 <body>
   <ul class="menu">
-    <li><a href="#!/view1">view1</a></li>
-    <li><a href="#!/view2">view2</a></li>
+    <li><a href="#!/view1">Partner Interface</a></li>
+    <li><a href="#!/view2">Customer Interface</a></li>
   </ul>
 
   <!--[if lt IE 7]>
@@ -26,17 +26,33 @@
 
   <div ng-view></div>
 
-  <div>Angular seed app: v<span app-version></span></div>
-
-	<article ng-app="myApp">
+	<div ng-app="myApp">
+		<div ng-controller="myController">
+			<form ng-submit="refresh()">
+			  <input type="text" ng-model="Reference"> 
+			  <input type="submit" value="Search">
+			</form>	
+			<hr>
+			<article>
+				<section>
+				  <h2 ng-repeat="product in refresh.data">{{product.id}}</h2>    
+				</section>
+			</article>
+		</div>
+	</div>
+	
+	<!-- <article ng-app="myApp">
 	  <section ng-controller="booksCtrl">
 	    <h2 ng-repeat="book in data.books">{{book.name}}</h2>    
 	  </section>
-	</article>
+	</article> -->
 
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
+	<!--  <article ng-app="myApp">
+	  <section ng-controller="productsCtrl">
+	    <h2 ng-repeat="product in data">{{product.id}}</h2>    
+	  </section>
+	</article>-->
+
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="app.js"></script>
