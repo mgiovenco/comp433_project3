@@ -19,7 +19,7 @@ import com.lmp.customer.model.CustomerOrderStatusRepresentation;
 import com.lmp.product.dao.ProductDao;
 import com.lmp.product.service.ProductActivity;
 
-@Path("/orderservice/")
+@Path("/orderservice")
 public class CustomerOrderResource implements CustomerOrderService {
 
 	@GET

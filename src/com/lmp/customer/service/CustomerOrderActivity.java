@@ -30,13 +30,15 @@ public class CustomerOrderActivity {
         customerOrderRepresentation.setOrderStatus(customerOrder.getOrderStatus());
         customerOrderRepresentation.setTrackingId(customerOrder.getTrackingId());
         
-		// Add the links
-		setLinks(customerOrderRepresentation);
+     // Add the link with other representations
+        Link getCustomerOrder = new Link("Get Customer Order", "http://localhost:8081/orderservice/orders?orderId="+customerOrder.getId(),"GET");	
+        customerOrderRepresentation.setLinks(getCustomerOrder);
         
         return customerOrderRepresentation;
     }
 
     public void addCustomerOrder(CustomerOrder customerOrder) throws Exception {
+  	
         customerOrderDao.createCustomerOrder(customerOrder);
     }
 
@@ -45,6 +47,11 @@ public class CustomerOrderActivity {
         
         CustomerOrderStatusRepresentation customerOrderStatusRepresentation = new CustomerOrderStatusRepresentation();
         customerOrderStatusRepresentation.setOrderStatus(customerOrder.getOrderStatus());
+        
+        
+     // Add the link with other representations
+        Link CustomerOrderStatus = new Link("Get Customer Order Status ", "http://localhost:8081/orderservice/orders?orderId="+customerOrder.getId()+"/status","GET");	
+        customerOrderStatusRepresentation.setLinks(CustomerOrderStatus);
         
         return customerOrderStatusRepresentation;
     }
@@ -56,6 +63,12 @@ public class CustomerOrderActivity {
     	customerOrder.setOrderStatus("CANCELED");
     	customerOrderDao.updateCustomerOrder(customerOrder);
     	
+    	 // Add the link with other representations
+        CustomerOrderStatusRepresentation customerOrderStatusRepresentation = new CustomerOrderStatusRepresentation();
+
+        Link cancelCustomerOrder = new Link("cancelCustomerOrder", "http://localhost:8081/orderservice/orders?orderId="+customerOrder.getId(),"DELETE");	
+        customerOrderStatusRepresentation.setLinks(cancelCustomerOrder);
+    	
     	return "OK";
     }
     
@@ -65,13 +78,25 @@ public class CustomerOrderActivity {
     	customerOrder.setOrderStatus("SHIPPED");
     	customerOrderDao.updateCustomerOrder(customerOrder);
     	
+    	 // Add the link with other representations
+        CustomerOrderStatusRepresentation customerOrderStatusRepresentation = new CustomerOrderStatusRepresentation();
+
+        Link shipCustomerOrder = new Link("Ship Customer Order", "http://localhost:8081/orderservice/orders?orderId="+customerOrder.getId()+"/ship","POST");	
+        customerOrderStatusRepresentation.setLinks(shipCustomerOrder);
+    	
     	return "OK";
     }
     
     public String sendFullfilmentAck(String id) throws Exception {
-    	customerOrderDao.selectCustomerOrder(Integer.parseInt(id));
+    	CustomerOrder customerOrder = customerOrderDao.selectCustomerOrder(Integer.parseInt(id));
     	
     	// TODO: This would interact with another system.  In the meantime, will just do nothing as long as something is found.
+    	
+    	 // Add the link with other representations
+        CustomerOrderStatusRepresentation customerOrderStatusRepresentation = new CustomerOrderStatusRepresentation();
+
+        Link sendFullfilmentAck = new Link("Send Fullfilment Ack", "http://localhost:8081/orderservice/orders?orderId="+customerOrder.getId()+"/sendfullfillmentack","POST");	
+        customerOrderStatusRepresentation.setLinks(sendFullfilmentAck);
     	
     	return "OK";
     }
@@ -96,6 +121,10 @@ public class CustomerOrderActivity {
         customerOrderRepresentation.setOrderTotal(customerOrder.getOrderTotal());
         customerOrderRepresentation.setTrackingId(customerOrder.getTrackingId());
     	
+     // Add the link with other representations
+        Link sendToPartners = new Link("Send To Partners", "http://localhost:8081/orderservice/orders?orderId="+customerOrder.getId()+"/sendtopartners","POST");	
+        customerOrderRepresentation.setLinks(sendToPartners);
+        
         return customerOrderRepresentation;
     }
     
@@ -149,13 +178,5 @@ public class CustomerOrderActivity {
         customerOrderDao.createCustomerOrderDetail(customerOrderDetail);
     }
     
-	/**
-	 * Sets all the links appropriately, for each kind of representation based on state
-	 * @param orderRep
-	 */
-	private void setLinks(CustomerOrderRepresentation customerOrderRepresentation) {
-		// Set up the activities that can be performed on orders
-		Link buy = new Link("buy", "http://api.mississippi.com:8080/bookstore/books/order?book_id=" + "123");	
-		customerOrderRepresentation.setLinks(buy);
-	}
+	
 }
