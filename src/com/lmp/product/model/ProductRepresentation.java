@@ -1,5 +1,7 @@
 package com.lmp.product.model;
 
+import java.math.BigDecimal;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -20,6 +22,7 @@ public class ProductRepresentation extends AbstractRepresentation {
     private int category_id;
     private int partner_id;
     private String picture;
+    private BigDecimal price;
 	
     public int getId() {
 		return id;
@@ -68,6 +71,12 @@ public class ProductRepresentation extends AbstractRepresentation {
 	}
 	public void setPicture(String picture) {
 		this.picture = picture;
+	}
+	public BigDecimal getPrice() {
+		return price;
+	}
+	public void setPrice(BigDecimal price) {
+		this.price = price;
 	}
     
 }

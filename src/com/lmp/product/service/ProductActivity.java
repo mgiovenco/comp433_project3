@@ -5,6 +5,7 @@ import com.lmp.product.dao.ProductDao;
 import com.lmp.product.model.Product;
 import com.lmp.product.model.ProductRepresentation;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -32,9 +33,10 @@ public class ProductActivity {
             productRepresentation.setPartner_id(product.getPartner_id());
             productRepresentation.setPicture(product.getPicture());
             productRepresentation.setVendor_product_id(product.getVendor_product_id());
+            productRepresentation.setPrice(new BigDecimal(9.95)); // just faking this out now for demo purposes
             
             // Add the link with other representations
-            Link searchProduct = new Link("product by ID", "http://localhost:8081/productservice/products?productId="+product.getId(),"GET");	
+            Link searchProduct = new Link("order product", "http://localhost:8081/orderservice/orders", "POST");	
             productRepresentation.setLinks(searchProduct);
         }
         

@@ -51,5 +51,35 @@ app.controller("myController", function ($scope, $http) {
     	}
 
     }
+    
+    $scope.purchase = function(path, prodId, price){
+    	
+    	console.log('inside');
+    	console.log(path);
+    	console.log(prodId);
+    	console.log(price);
+    	
+        var data = {"orderTotal" : price, "orderStatus" : "Received", "trackingId" : 111, "customerId" : 1, "billingInfoId" : 1, "shippingInfoId" : 1};
+    
+        var config = {
+            headers : {
+                'Content-Type': 'application/json;'
+            }
+        }
+
+        console.log('before');
+        $http.post(path, data, config)
+        .success(function (data, status, headers, config) {
+            $scope.orderCreatedResult = data;
+            console.log('after, result: ' + $scope.orderCreatedResult);
+        })
+        .error(function (data, status, header, config) {
+            $scope.ResponseDetails = "Data: " + data +
+                "<hr />status: " + status +
+                "<hr />headers: " + header +
+                "<hr />config: " + config;
+        });
+        
+    }
    
 });

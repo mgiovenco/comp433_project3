@@ -35,13 +35,26 @@
 			</form>	
 			<hr>
 			<div ng-if=result>
-				<p>{{result}}</p>	
 				<p>Product ID: {{result.id}}</p>
 				<p>Name: {{result.name}}</p>
 				<p>Description: {{result.description}}</p>
+				<p>Price: {{result.price}}</p>
 				<p>Available: {{result.product_available}}</p>
-				<p>Purchase: {{result.link}}</p>
+				<p>Hateoas Link: {{result.link}}</p>
+				<button style="height:30px;width:200px" ng-click="purchase(result.link[0].url, result.id, result.price)">Purchase Product</button>
+				<hr>
+				<div ng-if=orderCreatedResult>
+					<p>Order successfully created</p>
+					<p>Id: {{orderCreatedResult.id}}</p>
+					<p>Total: {{orderCreatedResult.orderTotal}}</p>
+					<p>Status: {{orderCreatedResult.orderStatus}}</p>
+					<p>Hateoas Link: {{orderCreatedResult.link}}</p>
+					<button>Check Order Status</button>
+					<button>Cancel Order</button>
+				</div>
+				<hr>
 			 </div>
+			 
 		</div>
 	</div>
 	

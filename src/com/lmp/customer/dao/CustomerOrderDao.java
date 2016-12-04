@@ -125,7 +125,7 @@ public class CustomerOrderDao {
      * @param customerOrder
      * @throws Exception
      */
-    public void createCustomerOrder(CustomerOrder customerOrder) throws Exception {
+    public int createCustomerOrder(CustomerOrder customerOrder) throws Exception {
         if (customerOrder != null) {
             try {
                 Connection conn = DBHelper.getconnection();
@@ -151,6 +151,7 @@ public class CustomerOrderDao {
                 try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         System.out.println("GeneratedKey: " + generatedKeys.getInt(1));
+                        return generatedKeys.getInt(1);
                     } else {
                         throw new SQLException("Creating customer order failed, no ID obtained.");
                     }
@@ -162,6 +163,7 @@ public class CustomerOrderDao {
         } else {
             throw new Exception("Cannot insert null customer order object");
         }
+		return 0;
     }
 
     /**

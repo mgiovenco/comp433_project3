@@ -38,11 +38,6 @@ public class CustomerOrderActivity {
         return customerOrderRepresentation;
     }
 
-    public void addCustomerOrder(CustomerOrder customerOrder) throws Exception {
-  	
-        customerOrderDao.createCustomerOrder(customerOrder);
-    }
-
     public CustomerOrderStatusRepresentation getCustomerOrderStatus(String id) throws SQLException {
         CustomerOrder customerOrder = customerOrderDao.selectCustomerOrder(Integer.parseInt(id));
         
@@ -115,17 +110,15 @@ public class CustomerOrderActivity {
         
     	CustomerOrder customerOrder = new CustomerOrder(customerOrderRequest.getId(), customerOrderRequest.getOrderTotal(), customerOrderRequest.getOrderStatus(), customerOrderRequest.getTrackingId(), customerOrderRequest.getCustomerId(),customerOrderRequest.getBillingInfoId(),customerOrderRequest.getShippingInfoId());
         
-        customerOrderDao.createCustomerOrder(customerOrder);
+        int orderId = customerOrderDao.createCustomerOrder(customerOrder);
     	
         CustomerOrderRepresentation customerOrderRepresentation = new CustomerOrderRepresentation();
-        customerOrderRepresentation.setId(customerOrder.getId());
+        customerOrderRepresentation.setId(orderId);
         customerOrderRepresentation.setOrderStatus(customerOrder.getOrderStatus());
         customerOrderRepresentation.setOrderTotal(customerOrder.getOrderTotal());
         customerOrderRepresentation.setTrackingId(customerOrder.getTrackingId());
-    	
         
-        
-     // Add the link with other representations
+        // Add the link with other representations
         Link sendToPartners = new Link("Send To Partners", "http://localhost:8081/orderservice/orders?orderId="+customerOrder.getId()+"/sendtopartners","POST");	
         customerOrderRepresentation.setLinks(sendToPartners);
         
