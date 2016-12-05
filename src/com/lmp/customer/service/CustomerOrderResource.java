@@ -59,85 +59,65 @@ public class CustomerOrderResource implements CustomerOrderService {
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
 	@Path("/orders/{orderId}")
-	public Response cancelCustomerOrder(@PathParam("orderId") String orderId) {
+	public CustomerOrderStatusRepresentation cancelCustomerOrder(@PathParam("orderId") String orderId) {
 		System.out.println("###cancelOrder invoked for orderId=" + orderId);
 		CustomerOrderActivity customerOrderActivity = new CustomerOrderActivity(new CustomerOrderDao());
-		
-		String result;
+
 		try {
-			result = customerOrderActivity.cancelCustomerOrder(orderId);
+			return customerOrderActivity.cancelCustomerOrder(orderId);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
-		if (result.equals("OK")) {
-			return Response.status(Status.OK).build();
-		}
-		return null;
 	}
 	
 	@POST
 	@Produces({"application/xml" , "application/json"})
 	@Path("/orders/{orderId}/ship")
-	public Response shipCustomerOrder(@PathParam("orderId") String orderId) {
+	public CustomerOrderStatusRepresentation shipCustomerOrder(@PathParam("orderId") String orderId) {
 		System.out.println("###shipCustomerOrder invoked for orderId=" + orderId);
 		CustomerOrderActivity customerOrderActivity = new CustomerOrderActivity(new CustomerOrderDao());
 		
-		String result;
 		try {
-			result = customerOrderActivity.shipCustomerOrder(orderId);
+			return customerOrderActivity.shipCustomerOrder(orderId);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
-		if (result.equals("OK")) {
-			return Response.status(Status.OK).build();
-		}
-		return null;
 	}
 
 	@POST
 	@Produces({"application/xml" , "application/json"})
 	@Path("/orders/{orderId}/sendfullfillmentack")
-	public Response sendFullfillmentAck(@PathParam("orderId") String orderId) {
+	public CustomerOrderStatusRepresentation sendFullfillmentAck(@PathParam("orderId") String orderId) {
 		System.out.println("###sendFullfillmentAck invoked for orderId=" + orderId);
 		CustomerOrderActivity customerOrderActivity = new CustomerOrderActivity(new CustomerOrderDao());
 		
-		String result;
 		try {
-			result = customerOrderActivity.sendFullfilmentAck(orderId);
+			return customerOrderActivity.sendFullfilmentAck(orderId);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
-		if (result.equals("OK")) {
-			return Response.status(Status.OK).build();
-		}
-		return null;
 	}
 	
 	@POST
 	@Produces({"application/xml" , "application/json"})
 	@Path("/orders/{orderId}/sendtopartners")
-	public Response sendToPartners(@PathParam("orderId") String orderId) {
+	public CustomerOrderStatusRepresentation sendToPartners(@PathParam("orderId") String orderId) {
 		System.out.println("###sendToPartners invoked for orderId=" + orderId);
 		CustomerOrderActivity customerOrderActivity = new CustomerOrderActivity(new CustomerOrderDao());
 		
-		String result;
 		try {
-			result = customerOrderActivity.sendFullfilmentAck(orderId);
+			return customerOrderActivity.sendFullfilmentAck(orderId);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
-		if (result.equals("OK")) {
-			return Response.status(Status.OK).build();
-		}
-		return null;
 	}
 
 	@POST

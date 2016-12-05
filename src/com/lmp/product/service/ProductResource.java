@@ -40,7 +40,7 @@ public class ProductResource implements ProductService {
 	}
 
 	@GET
-	@Produces({"application/xml" , "application/json"})
+	@Produces({"application/json", "application/xml" })
 	@Path("/products/{productId}")
 	public ProductRepresentation getProduct(@PathParam("productId") String productId) {
 		System.out.println("GET METHOD Request for single product, productId=" + productId);

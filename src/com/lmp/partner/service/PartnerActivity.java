@@ -41,7 +41,7 @@ public class PartnerActivity {
         
 
         // Add the link with other representations
-        Link searchPartner = new Link("partner by ID", "http://localhost:8081/partnerservice/partners?partnerId="+partner.getId(),"GET");	
+        Link searchPartner = new Link("Partner by ID", "GET", "http://localhost:8081/partnerservice/partners?partnerId="+partner.getId(), "application/json");	
         partnerRepresentation.setLinks(searchPartner);
         return partnerRepresentation;
         }
@@ -72,7 +72,7 @@ public class PartnerActivity {
           
 	        // Add the link with other representations
 			
-			Link selectAllPartners = new Link("Select All Partners", "http://localhost:8081/partnerservice/allPartners","GET");	
+			Link selectAllPartners = new Link("Select All Partners", "GET", "http://localhost:8081/partnerservice/allPartners","application/json");	
 			partnerRepresentation.setLinks(selectAllPartners);
 			
 		
@@ -100,7 +100,7 @@ public class PartnerActivity {
         partnerRepresentation.setLogo(partner.getLogo());
         
      // Add the link with other representations
-        Link createPartner = new Link("createPartner", "http://localhost:8081/partnerservice/newPartner","POST");	
+        Link createPartner = new Link("Create Partner", "POST", "http://localhost:8081/partnerservice/newPartner", "appliaction/json");	
 		partnerRepresentation.setLinks(createPartner);
        
         return partnerRepresentation;

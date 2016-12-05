@@ -78,5 +78,12 @@ public class ProductRepresentation extends AbstractRepresentation {
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
+	@Override
+	public String toString() {
+		return "ProductRepresentation [id=" + id + ", vendor_product_id=" + vendor_product_id + ", name=" + name
+				+ ", description=" + description + ", product_available=" + product_available + ", category_id="
+				+ category_id + ", partner_id=" + partner_id + ", picture=" + picture + ", price=" + price + "]";
+	}
+	
     
 }

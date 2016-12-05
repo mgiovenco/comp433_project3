@@ -35,7 +35,7 @@ public class CustomerOrderActivity {
         customerOrderRepresentation.setTrackingId(customerOrder.getTrackingId());
         
      // Add the link with other representations
-        Link getCustomerOrder = new Link("Get Customer Order", "http://localhost:8081/orderservice/orders?orderId="+customerOrder.getId(),"GET");	
+        Link getCustomerOrder = new Link("Get Customer Order", "GET", "http://localhost:8081/orderservice/orders?orderId="+customerOrder.getId(), "application/json");	
         customerOrderRepresentation.setLinks(getCustomerOrder);
         
         return customerOrderRepresentation;
@@ -48,15 +48,15 @@ public class CustomerOrderActivity {
         customerOrderStatusRepresentation.setOrderStatus(customerOrder.getOrderStatus());
         
         
-     // Add the link with other representations
-        Link CustomerOrderStatus = new Link("Get Customer Order Status ", "http://localhost:8081/orderservice/orders?orderId="+customerOrder.getId()+"/status","GET");	
-        customerOrderStatusRepresentation.setLinks(CustomerOrderStatus);
+        // Add the link with other representations
+        Link orderStatusLink = new Link("Check Order Status", "GET", "http://localhost:8081/orderservice/orders/" + id + "/status", "application/json");
+        customerOrderStatusRepresentation.setLinks(orderStatusLink);
         
         return customerOrderStatusRepresentation;
     }
 
 
-    public String cancelCustomerOrder(String id) throws Exception {
+    public CustomerOrderStatusRepresentation cancelCustomerOrder(String id) throws Exception {
     	CustomerOrder customerOrder = customerOrderDao.selectCustomerOrder(Integer.parseInt(id));
     	
     	customerOrder.setOrderStatus("CANCELED");
@@ -64,48 +64,50 @@ public class CustomerOrderActivity {
     	
     	 // Add the link with other representations
         CustomerOrderStatusRepresentation customerOrderStatusRepresentation = new CustomerOrderStatusRepresentation();
-
-        Link cancelCustomerOrder = new Link("cancelCustomerOrder", "http://localhost:8081/orderservice/orders?orderId="+customerOrder.getId(),"DELETE");	
-        customerOrderStatusRepresentation.setLinks(cancelCustomerOrder);
+        customerOrderStatusRepresentation.setOrderStatus(customerOrder.getOrderStatus());
+        
+        Link orderStatusLink = new Link("Check Order Status", "GET", "http://localhost:8081/orderservice/orders/" + id + "/status", "application/json");
+        customerOrderStatusRepresentation.setLinks(orderStatusLink);
     	
-    	return "OK";
+        return customerOrderStatusRepresentation;
     }
     
-    public String shipCustomerOrder(String id) throws Exception {
+    public CustomerOrderStatusRepresentation shipCustomerOrder(String id) throws Exception {
     	CustomerOrder customerOrder = customerOrderDao.selectCustomerOrder(Integer.parseInt(id));
     	
     	customerOrder.setOrderStatus("SHIPPED");
     	customerOrderDao.updateCustomerOrder(customerOrder);
     	
-    	 // Add the link with other representations
         CustomerOrderStatusRepresentation customerOrderStatusRepresentation = new CustomerOrderStatusRepresentation();
 
-        Link shipCustomerOrder = new Link("Ship Customer Order", "http://localhost:8081/orderservice/orders?orderId="+customerOrder.getId()+"/ship","POST");	
-        customerOrderStatusRepresentation.setLinks(shipCustomerOrder);
+        Link orderStatusLink = new Link("Check Order Status", "GET", "http://localhost:8081/orderservice/orders/" + id + "/status", "application/json");
+        customerOrderStatusRepresentation.setLinks(orderStatusLink);
     	
-    	return "OK";
+        return customerOrderStatusRepresentation;
     }
     
-    public String sendFullfilmentAck(String id) throws Exception {
+    public CustomerOrderStatusRepresentation sendFullfilmentAck(String id) throws Exception {
     	CustomerOrder customerOrder = customerOrderDao.selectCustomerOrder(Integer.parseInt(id));
     	
     	// TODO: This would interact with another system.  In the meantime, will just do nothing as long as something is found.
-    	
-    	 // Add the link with other representations
         CustomerOrderStatusRepresentation customerOrderStatusRepresentation = new CustomerOrderStatusRepresentation();
 
-        Link sendFullfilmentAck = new Link("Send Fullfilment Ack", "http://localhost:8081/orderservice/orders?orderId="+customerOrder.getId()+"/sendfullfillmentack","POST");	
-        customerOrderStatusRepresentation.setLinks(sendFullfilmentAck);
+        Link orderStatusLink = new Link("Check Order Status", "GET", "http://localhost:8081/orderservice/orders/" + id + "/status", "application/json");
+        customerOrderStatusRepresentation.setLinks(orderStatusLink);
     	
-    	return "OK";
+        return customerOrderStatusRepresentation;
     }
     
-    public String sendToPartners(String id) throws Exception {
+    public CustomerOrderStatusRepresentation sendToPartners(String id) throws Exception {
     	customerOrderDao.selectCustomerOrder(Integer.parseInt(id));
     	
     	// TODO: This would interact with another system.  In the meantime, will just do nothing as long as something is found.
+        CustomerOrderStatusRepresentation customerOrderStatusRepresentation = new CustomerOrderStatusRepresentation();
     	
-    	return "OK";
+        Link orderStatusLink = new Link("Check Order Status", "GET", "http://localhost:8081/orderservice/orders/" + id + "/status", "application/json");
+        customerOrderStatusRepresentation.setLinks(orderStatusLink);
+    	
+        return customerOrderStatusRepresentation;
     }
     
 
@@ -122,8 +124,10 @@ public class CustomerOrderActivity {
         customerOrderRepresentation.setTrackingId(customerOrder.getTrackingId());
         
         // Add the link with other representations
-        Link sendToPartners = new Link("Send To Partners", "http://localhost:8081/orderservice/orders?orderId="+customerOrder.getId()+"/sendtopartners","POST");	
-        customerOrderRepresentation.setLinks(sendToPartners);
+        Link orderStatusLink = new Link("Check Order Status", "GET", "http://localhost:8081/orderservice/orders/" + orderId + "/status","application/json");
+        Link cancelOrderLink = new Link("Cancel Order", "DELETE", "http://localhost:8081/orderservice/orders/" + orderId, "application/json");
+        
+        customerOrderRepresentation.setLinks(orderStatusLink, cancelOrderLink);
         
         return customerOrderRepresentation;
     }

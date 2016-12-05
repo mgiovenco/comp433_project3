@@ -41,16 +41,29 @@
 				<p>Price: {{result.price}}</p>
 				<p>Available: {{result.product_available}}</p>
 				<p>Hateoas Link: {{result.link}}</p>
-				<button style="height:30px;width:200px" ng-click="purchase(result.link[0].url, result.id, result.price)">Purchase Product</button>
-				<hr>
+				<button style="height:30px;width:200px" ng-click="purchase(result.link[0].uri, result.link[0].action, result.id, result.price)">Purchase Product</button>
 				<div ng-if=orderCreatedResult>
+					<hr>
 					<p>Order successfully created</p>
 					<p>Id: {{orderCreatedResult.id}}</p>
 					<p>Total: {{orderCreatedResult.orderTotal}}</p>
 					<p>Status: {{orderCreatedResult.orderStatus}}</p>
-					<p>Hateoas Link: {{orderCreatedResult.link}}</p>
-					<button>Check Order Status</button>
-					<button>Cancel Order</button>
+					<p>Hateoas Link: {{orderCreatedResult.link[0]}}</p>
+					<p>Hateoas Link: {{orderCreatedResult.link[1]}}</p>
+					<button style="height:30px;width:200px" ng-click="checkStatus(orderCreatedResult.link[0].uri, orderCreatedResult.link[0].action, orderCreatedResult.id)">Check Order Status</button>
+					<button style="height:30px;width:200px" ng-click="cancel(orderCreatedResult.link[1].uri, orderCreatedResult.link[1].action, orderCreatedResult.id)">Cancel Order</button>
+				
+					<div ng-if=orderStatus>
+						<hr>
+						<p>Order Status: {{orderStatus.orderStatus}}</p>
+						<p>Hateoas Link: {{orderStatus.link}}</p>
+					</div>
+					
+					<div ng-if=cancelResult>
+						<hr>
+						<p>Order Canceled</p>
+						<p>Hateoas Link: {{cancelResult.link}}</p>
+					</div>
 				</div>
 				<hr>
 			 </div>

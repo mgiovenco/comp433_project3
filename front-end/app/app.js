@@ -52,7 +52,7 @@ app.controller("myController", function ($scope, $http) {
 
     }
     
-    $scope.purchase = function(path, prodId, price){
+    $scope.purchase = function(path, action, prodId, price){
     	
     	console.log('inside');
     	console.log(path);
@@ -80,6 +80,40 @@ app.controller("myController", function ($scope, $http) {
                 "<hr />config: " + config;
         });
         
+    }
+    
+    $scope.checkStatus = function(path, action, orderId){
+    	console.log('inside');
+    	console.log('path: ' + path);
+    	console.log('orderId: ' + orderId);
+    	if(orderId){
+            var res = $http({
+                method: action,
+                url: path
+            })
+            .then(function (response) {
+            	$scope.orderStatus = response.data;
+            	console.log('complete: ' + $scope.orderStatus);
+            });
+    	}
+    	console.log('complete');
+    }
+    
+    $scope.cancel = function(path, action, orderId){
+    	console.log('inside');
+    	console.log('path: ' + path);
+    	console.log('orderId: ' + orderId);
+    	if(orderId){
+            var res = $http({
+                method: action,
+                url: path
+            })
+            .then(function (response) {
+            	$scope.cancelResult = response.data;
+            	console.log('complete: ' + $scope.cancelResult);
+            });
+    	}
+    	console.log('complete');
     }
    
 });

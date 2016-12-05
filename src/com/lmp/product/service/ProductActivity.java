@@ -36,9 +36,11 @@ public class ProductActivity {
             productRepresentation.setPrice(new BigDecimal(9.95)); // just faking this out now for demo purposes
             
             // Add the link with other representations
-            Link searchProduct = new Link("order product", "http://localhost:8081/orderservice/orders", "POST");	
+            Link searchProduct = new Link("Order product", "POST", "http://localhost:8081/orderservice/orders", "application/json");	
             productRepresentation.setLinks(searchProduct);
         }
+        
+        System.out.println("###productRepresentation: " + productRepresentation);
         
         return productRepresentation;
 	}
@@ -60,7 +62,7 @@ public class ProductActivity {
           productRepresentation.setVendor_product_id(product.getVendor_product_id());
     
           // Add the link with other representations
-          Link getAllProducts = new Link("Get All Products", "http://localhost:8081/productservice/products","GET");	
+          Link getAllProducts = new Link("Get All Products", "GET", "http://localhost:8081/productservice/products", "application/json");	
           productRepresentation.setLinks(getAllProducts);
                      
           productRepresentations.add(productRepresentation);
@@ -84,7 +86,7 @@ public class ProductActivity {
         productRepresentation.setVendor_product_id(product.getVendor_product_id());
         
         // Add the link with other representations
-        Link creatProduct = new Link("Creat Product", "http://localhost:8081/productservice/products","POST");	
+        Link creatProduct = new Link("Creat Product", "POST", "http://localhost:8081/productservice/products","application/json");	
         productRepresentation.setLinks(creatProduct);
         
         return productRepresentation;

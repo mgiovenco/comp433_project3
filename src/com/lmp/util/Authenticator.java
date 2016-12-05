@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import javax.ws.rs.core.Response;
 
-import com.exception.generalException;
+//import com.exception.generalException;
 
 /**
  * It checks customer database for matching credentials
@@ -18,7 +18,7 @@ import com.exception.generalException;
 
 public class Authenticator {
 
-	public static boolean authenticateUser(String email, String password) {
+	/*public static boolean authenticateUser(String email, String password) {
 		boolean isUserAuthentic = false;
 		Connection conn = DatabaseConnection.getSqlConnection();
 		PreparedStatement pstmt = null;
@@ -55,7 +55,7 @@ public class Authenticator {
 		}
 		
 		return isUserAuthentic;
-	}
+	}*/
 	
 	/**
 	 * It verifies if customer exists
@@ -63,7 +63,7 @@ public class Authenticator {
 	 * @param password	customer password hash
 	 * @return customerID 	customer ID from DB or -1 if invalid 
 	 */
-	public static int authenticateCustomer(String email, String password) {
+	/*public static int authenticateCustomer(String email, String password) {
 		int customerID = -1;
 		Connection conn = DatabaseConnection.getSqlConnection();
 		PreparedStatement pstmt = null;
@@ -99,5 +99,5 @@ public class Authenticator {
 		}
 		
 		return customerID;
-	}	
+	}	*/
 }
