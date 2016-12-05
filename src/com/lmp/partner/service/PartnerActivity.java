@@ -66,15 +66,12 @@ public class PartnerActivity {
 	        partnerRepresentation.setEmail(partner.getEmail());
 	        partnerRepresentation.setURL(partner.getURL());
 	        partnerRepresentation.setLogo(partner.getLogo());
-            
+	        
+	        // Add the link with other representations
+	        Link searchPartner = new Link("Get Partner (self)", "GET", "http://localhost:8081/partnerservice/partners/" + partner.getId(), "application/json");	
+	        partnerRepresentation.setLinks(searchPartner);
 	        partnerRepresentations.add(partnerRepresentation);
           
-	        // Add the link with other representations
-			
-			Link selectAllPartners = new Link("Select All Partners", "GET", "http://localhost:8081/partnerservice/allPartners","application/json");	
-			partnerRepresentation.setLinks(selectAllPartners);
-			
-		
 		}
 		return partnerRepresentations;
 	}

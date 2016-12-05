@@ -110,15 +110,31 @@
 			<p>Email: {{ partnerSearchResult.email}}</p>
 			<p>Hateoas Link: {{partnerSearchResult.link[0]}}</p>	
 			</div>
+			<hr>
+			<p>List All Partner Resources</p>
+			<button style="height:30px;width:200px" ng-click="allPartners()">Get All Partners</button>
+			
+			<div ng-if=allPartnersResults>
+				<hr>
+				<div ng-repeat="partnerSearchResult in allPartnersResults">
+					<p>Partner Id: {{ partnerSearchResult.id}}</p>
+					<p>Company: {{ partnerSearchResult.companyName}}</p>
+					<p>Address: {{ partnerSearchResult.address}}</p>
+					<p>Phone: {{ partnerSearchResult.phone}}</p>
+					<p>City: {{ partnerSearchResult.city}}</p>
+					<p>State: {{ partnerSearchResult.state}}</p>
+					<p>Postal Code: {{ partnerSearchResult.postalCode}}</p>
+					<p>Country: {{ partnerSearchResult.country}}</p>
+					<p>Phone: {{ partnerSearchResult.phone}}</p>
+					<p>Email: {{ partnerSearchResult.email}}</p>
+					<p>Hateoas Link: {{partnerSearchResult.link[0]}}</p>
+					<hr>
+				</div>
+			</div>
+			
 		</div>
 	</div>
 	
-	<!-- <article ng-app="myApp">
-	  <section ng-controller="booksCtrl">
-	    <h2 ng-repeat="book in data.books">{{book.name}}</h2>    
-	  </section>
-	</article> -->
-
 	<!--  <article ng-app="myApp">
 	  <section ng-controller="productsCtrl">
 	    <h2 ng-repeat="product in results">{{product.id}}</h2>    

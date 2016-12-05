@@ -105,6 +105,20 @@ app.controller("myController", function ($scope, $http) {
     	}
     }
     
+    // All Partner Search
+	$scope.allPartnersResults = '';
+    $scope.allPartners = function(){
+    	console.log('inside');
+        var res = $http({
+            method: 'GET',
+            url: 'http://localhost:8081/partnerservice/allPartners/'
+        })
+        .then(function (response) {
+        	$scope.allPartnersResults = response.data;
+        	console.log('complete: ' + $scope.allPartnersResults);
+        });
+    }
+    
     // Order Creation/Purchase
     $scope.purchase = function(path, action, prodId, price){
     	console.log('inside');
