@@ -34,7 +34,7 @@ public class ProductActivity {
             productRepresentation.setPicture(product.getPicture());
             productRepresentation.setVendor_product_id(product.getVendor_product_id());
             productRepresentation.setPrice(new BigDecimal(9.95)); // just faking this out now for demo purposes
-            
+            productRepresentation.setProduct_available(true); // just faking this out now for demo purposes
             // Add the link with other representations
             Link searchProduct = new Link("Order product", "POST", "http://localhost:8081/orderservice/orders", "application/json");	
             productRepresentation.setLinks(searchProduct);
