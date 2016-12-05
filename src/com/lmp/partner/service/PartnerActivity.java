@@ -24,11 +24,10 @@ public class PartnerActivity {
 	public PartnerRepresentation getPartner(String id) throws SQLException {
 		Partner partner = partnerDao.selectPartner(Integer.parseInt(id));
 		
-
         PartnerRepresentation partnerRepresentation = new PartnerRepresentation();
 
-        partnerRepresentation.setCompanyName(partner.getCompanyName());      
         partnerRepresentation.setId(partner.getId());
+        partnerRepresentation.setCompanyName(partner.getCompanyName());      
         partnerRepresentation.setAddress(partner.getAddress());
         partnerRepresentation.setCity(partner.getCity());
         partnerRepresentation.setState(partner.getState());
@@ -41,10 +40,10 @@ public class PartnerActivity {
         
 
         // Add the link with other representations
-        Link searchPartner = new Link("Partner by ID", "GET", "http://localhost:8081/partnerservice/partners?partnerId="+partner.getId(), "application/json");	
+        Link searchPartner = new Link("Get Partner (self)", "GET", "http://localhost:8081/partnerservice/partners/" + partner.getId(), "application/json");	
         partnerRepresentation.setLinks(searchPartner);
         return partnerRepresentation;
-        }
+   }
 		
 	public Set<PartnerRepresentation> selectAllPartners() throws SQLException {
 		Set<PartnerRepresentation> partnerRepresentations = new HashSet<PartnerRepresentation>();

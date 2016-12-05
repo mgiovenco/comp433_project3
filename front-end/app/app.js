@@ -33,27 +33,80 @@ app.controller('productsCtrl', function($scope, $http) {
 
 app.controller("myController", function ($scope, $http) {
 
-	$scope.result = '';
-	
-    $scope.search = function(){
+	// Product Search
+	$scope.productSearchResult = '';
+    $scope.productSearch = function(){
     	if($scope.productId){
             var res = $http({
                 method: 'GET',
                 url: 'http://localhost:8081/productservice/products/' + $scope.productId
             })
             .then(function (response) {
-            	$scope.result = response.data;
-            	console.log('complete: ' + $scope.result);
+            	$scope.productSearchResult = response.data;
+            	console.log('complete: ' + $scope.productSearchResult);
             });
     	}
     	else {
-    		$scope.result = '';
+    		$scope.productSearchResult = '';
     	}
-
     }
     
+    // Order Search
+	$scope.orderSearchResult = '';
+    $scope.orderSearch = function(){
+    	if($scope.orderId){
+            var res = $http({
+                method: 'GET',
+                url: 'http://localhost:8081/orderservice/orders/' + $scope.orderId
+            })
+            .then(function (response) {
+            	$scope.orderSearchResult = response.data;
+            	console.log('complete: ' + $scope.orderSearchResult);
+            });
+    	}
+    	else {
+    		$scope.orderSearchResult = '';
+    	}
+    }
+    
+    // Customer Search
+	$scope.customerSearchResult = '';
+    $scope.customerSearch = function(){
+    	if($scope.custId){
+            var res = $http({
+                method: 'GET',
+                url: 'http://localhost:8081/orderservice/customers/' + $scope.custId
+            })
+            .then(function (response) {
+            	$scope.customerSearchResult = response.data;
+            	console.log('complete: ' + $scope.customerSearchResult);
+            });
+    	}
+    	else {
+    		$scope.customerSearchResult = '';
+    	}
+    }
+    
+    // Partner Search
+	$scope.partnerSearchResult = '';
+    $scope.partnerSearch = function(){
+    	if($scope.partnerId){
+            var res = $http({
+                method: 'GET',
+                url: 'http://localhost:8081/partnerservice/partners/' + $scope.partnerId
+            })
+            .then(function (response) {
+            	$scope.partnerSearchResult = response.data;
+            	console.log('complete: ' + $scope.partnerSearchResult);
+            });
+    	}
+    	else {
+    		$scope.partnerSearchResult = '';
+    	}
+    }
+    
+    // Order Creation/Purchase
     $scope.purchase = function(path, action, prodId, price){
-    	
     	console.log('inside');
     	console.log(path);
     	console.log(prodId);
@@ -82,6 +135,7 @@ app.controller("myController", function ($scope, $http) {
         
     }
     
+    // Order Check Status
     $scope.checkStatus = function(path, action, orderId){
     	console.log('inside');
     	console.log('path: ' + path);
@@ -99,6 +153,7 @@ app.controller("myController", function ($scope, $http) {
     	console.log('complete');
     }
     
+    // Order Cancel
     $scope.cancel = function(path, action, orderId){
     	console.log('inside');
     	console.log('path: ' + path);

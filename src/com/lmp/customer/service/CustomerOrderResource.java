@@ -2,7 +2,7 @@ package com.lmp.customer.service;
 
 import java.sql.SQLException;
 import java.util.Set;
-import java.util.Authenticator;
+import com.lmp.util.Authenticator;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -18,6 +18,7 @@ import com.lmp.customer.dao.CustomerOrderDao;
 import com.lmp.customer.model.CustomerOrderRepresentation;
 import com.lmp.customer.model.CustomerOrderRequest;
 import com.lmp.customer.model.CustomerOrderStatusRepresentation;
+import com.lmp.customer.model.CustomerRepresentation;
 import com.lmp.product.dao.ProductDao;
 import com.lmp.product.service.ProductActivity;
 import javax.ws.rs.core.CacheControl;
@@ -130,6 +131,22 @@ public class CustomerOrderResource implements CustomerOrderService {
         try {
 			return customerOrderActivity.createCustomerOrder(customerOrderRequest);
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@GET
+	@Produces({"application/xml" , "application/json"})
+	@Path("/customers/{custId}")
+	public CustomerRepresentation getCustomer(@PathParam("custId") String custId) {
+		System.out.println("###getCustomer invoked for custId=" + custId);
+		CustomerOrderActivity customerOrderActivity = new CustomerOrderActivity(new CustomerOrderDao());
+		
+		try {
+			return customerOrderActivity.getCustomer(custId);
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;

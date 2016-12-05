@@ -1,5 +1,6 @@
 package com.lmp.customer.dao;
 
+import com.lmp.customer.model.Customer;
 import com.lmp.customer.model.CustomerOrder;
 import com.lmp.customer.model.CustomerOrderComplete;
 import com.lmp.customer.model.CustomerOrderDetail;
@@ -38,6 +39,9 @@ public class CustomerOrderDao {
     private static final String INSERT_CUSTOMER_ORDER_DETAIL = "INSERT INTO customer_order_detail (customer_order_id, product_id, created_on) values (?, ?, ?)";
     private static final String SELECT_CUSTOMER_ORDER_DETAILS_BY_ORDER_ID = "select cod.id, cod.customer_order_id, cod.product_id, cod.created_on, cod.updated_on from customer_order_detail cod join customer_order co on (cod.customer_order_id = co.id) where co.id = ?";
 
+    private static final String SELECT_CUSTOMER = "SELECT id, first_name, last_name, phone, email, active, created_on, updated_on from customer where id = ?";
+
+    
     /**
      * Select single customer order by id
      *
@@ -413,4 +417,31 @@ public class CustomerOrderDao {
 
         return customerOrderDetailList;
     }
+    
+    /**
+     * Select single customer by id
+     *
+     * @param id
+     * @return
+     */
+    public Customer selectCustomer(int id) throws SQLException {
+
+        Customer customer = null;
+
+        try {
+            Connection conn = DBHelper.getconnection();
+            PreparedStatement ps = conn.prepareStatement(SELECT_CUSTOMER, id);
+            ps.setInt(1, id);
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                customer = new Customer(resultSet.getInt("id"), resultSet.getString("first_name"), resultSet.getString("last_name"), resultSet.getString("phone"), resultSet.getString("email"), resultSet.getBoolean("active"), resultSet.getTimestamp("created_on"), resultSet.getTimestamp("updated_on"));
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException: " + e);
+        }
+
+        return customer;
+    }
+
 }

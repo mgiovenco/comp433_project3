@@ -7,12 +7,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javax.ws.rs.Path;
+
 import com.lmp.customer.dao.CustomerOrderDao;
+import com.lmp.customer.model.Customer;
 import com.lmp.customer.model.CustomerOrder;
 import com.lmp.customer.model.CustomerOrderDetail;
 import com.lmp.customer.model.CustomerOrderRepresentation;
 import com.lmp.customer.model.CustomerOrderRequest;
 import com.lmp.customer.model.CustomerOrderStatusRepresentation;
+import com.lmp.customer.model.CustomerRepresentation;
 import com.lmp.customer.model.Payment;
 import com.lmp.global.Link;
 
@@ -34,9 +38,13 @@ public class CustomerOrderActivity {
         customerOrderRepresentation.setOrderStatus(customerOrder.getOrderStatus());
         customerOrderRepresentation.setTrackingId(customerOrder.getTrackingId());
         
-     // Add the link with other representations
-        Link getCustomerOrder = new Link("Get Customer Order", "GET", "http://localhost:8081/orderservice/orders?orderId="+customerOrder.getId(), "application/json");	
-        customerOrderRepresentation.setLinks(getCustomerOrder);
+        // Add the link with other representations
+        Link orderStatusLink = new Link("Check Order Status", "GET", "http://localhost:8081/orderservice/orders/" + id + "/status","application/json");
+        Link cancelOrderLink = new Link("Cancel Order", "DELETE", "http://localhost:8081/orderservice/orders/" + id, "application/json");
+        Link shipCustomerOrderLink = new Link("Ship Customer Order", "POST", "http://localhost:8081/orderservice/orders/" + id + "/ship", "application/json");
+        Link sendFullfillmentAck = new Link("Send Fullfillment Acknowledgement", "POST", "http://localhost:8081/orderservice/orders/" + id + "/sendfullfillmentack", "application/json");
+        
+        customerOrderRepresentation.setLinks(orderStatusLink, cancelOrderLink, shipCustomerOrderLink, sendFullfillmentAck);
         
         return customerOrderRepresentation;
     }
@@ -130,6 +138,23 @@ public class CustomerOrderActivity {
         customerOrderRepresentation.setLinks(orderStatusLink, cancelOrderLink);
         
         return customerOrderRepresentation;
+    }
+    
+    public CustomerRepresentation getCustomer(String id) throws SQLException {
+        Customer customer = customerOrderDao.selectCustomer(Integer.parseInt(id));
+
+        CustomerRepresentation customerRepresentation = new CustomerRepresentation();
+        customerRepresentation.setId(customer.getId());
+        customerRepresentation.setFirstName(customer.getFirstName());
+        customerRepresentation.setLastName(customer.getLastName());
+        customerRepresentation.setPhone(customer.getPhone());
+        
+        // Add the link with other representations
+        Link getCustomerLink = new Link("Get Customer (self)", "GET", "http://localhost:8081/orderservice/customers/" + id,"application/json");
+        
+        customerRepresentation.setLinks(getCustomerLink);
+        
+        return customerRepresentation;
     }
     
 

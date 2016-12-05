@@ -22,5 +22,4 @@ public class CustomerOrderStatusRepresentation extends AbstractRepresentation {
 		this.orderStatus = orderStatus;
 	}
     
-    
 }

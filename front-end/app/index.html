@@ -15,11 +15,6 @@
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
-  <ul class="menu">
-    <li><a href="#!/view1">Partner Interface</a></li>
-    <li><a href="#!/view2">Customer Interface</a></li>
-  </ul>
-
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
@@ -29,19 +24,19 @@
 	<p>Product Search by Product Id</p>
 	<div ng-app="myApp">
 		<div ng-controller="myController">
-			<form ng-submit="search()">
+			<form ng-submit="productSearch()">
 			  <input type="text" ng-model="productId"> 
 			  <input type="submit" value="Search">
 			</form>	
 			<hr>
-			<div ng-if=result>
-				<p>Product ID: {{result.id}}</p>
-				<p>Name: {{result.name}}</p>
-				<p>Description: {{result.description}}</p>
-				<p>Price: {{result.price}}</p>
-				<p>Available: {{result.product_available}}</p>
-				<p>Hateoas Link: {{result.link}}</p>
-				<button style="height:30px;width:200px" ng-click="purchase(result.link[0].uri, result.link[0].action, result.id, result.price)">Purchase Product</button>
+			<div ng-if=productSearchResult>
+				<p>Product ID: {{productSearchResult.id}}</p>
+				<p>Name: {{productSearchResult.name}}</p>
+				<p>Description: {{productSearchResult.description}}</p>
+				<p>Price: {{productSearchResult.price}}</p>
+				<p>Available: {{productSearchResult.product_available}}</p>
+				<p>Hateoas Link: {{productSearchResult.link}}</p>
+				<button style="height:30px;width:200px" ng-click="purchase(productSearchResult.link[0].uri, productSearchResult.link[0].action, productSearchResult.id, productSearchResult.price)">Purchase Product</button>
 				<div ng-if=orderCreatedResult>
 					<hr>
 					<p>Order successfully created</p>
@@ -68,6 +63,53 @@
 				<hr>
 			 </div>
 			 
+			 <p>Order Search by Order Id</p>
+			 <form ng-submit="orderSearch()">
+			  <input type="text" ng-model="orderId"> 
+			  <input type="submit" value="Search">
+			</form>	
+			<div ng-if=orderSearchResult>
+			<p>Order Id: {{ orderSearchResult.id}}</p>
+			<p>Total: {{ orderSearchResult.orderTotal}}</p>
+			<p>Status: {{ orderSearchResult.orderStatus}}</p>
+			<p>Total: {{ orderSearchResult.orderTotal}}</p>
+			<p>Hateoas Link: {{orderSearchResult.link[0]}}</p>
+			<p>Hateoas Link: {{orderSearchResult.link[1]}}</p>
+			<p>Hateoas Link: {{orderSearchResult.link[2]}}</p>
+			<p>Hateoas Link: {{orderSearchResult.link[3]}}</p>		
+			</div>
+			<hr>
+			<p>Customer Search by Cust Id</p>
+			<form ng-submit="customerSearch()">
+			  <input type="text" ng-model="custId"> 
+			  <input type="submit" value="Search">
+			</form>
+			<div ng-if=customerSearchResult>
+			<p>Customer Id: {{ customerSearchResult.id}}</p>
+			<p>First Name: {{ customerSearchResult.firstName}}</p>
+			<p>Last Name: {{ customerSearchResult.lastName}}</p>
+			<p>Phone: {{ customerSearchResult.phone}}</p>
+			<p>Hateoas Link: {{customerSearchResult.link[0]}}</p>	
+			</div>
+			<hr>
+			<p>Partner Search by Partner Id</p>
+			<form ng-submit="partnerSearch()">
+			  <input type="text" ng-model="partnerId"> 
+			  <input type="submit" value="Search">
+			</form>
+			<div ng-if=partnerSearchResult>
+			<p>Partner Id: {{ partnerSearchResult.id}}</p>
+			<p>Company: {{ partnerSearchResult.companyName}}</p>
+			<p>Address: {{ partnerSearchResult.address}}</p>
+			<p>Phone: {{ partnerSearchResult.phone}}</p>
+			<p>City: {{ partnerSearchResult.city}}</p>
+			<p>State: {{ partnerSearchResult.state}}</p>
+			<p>Postal Code: {{ partnerSearchResult.postalCode}}</p>
+			<p>Country: {{ partnerSearchResult.country}}</p>
+			<p>Phone: {{ partnerSearchResult.phone}}</p>
+			<p>Email: {{ partnerSearchResult.email}}</p>
+			<p>Hateoas Link: {{partnerSearchResult.link[0]}}</p>	
+			</div>
 		</div>
 	</div>
 	
